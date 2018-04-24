@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/notas.iml" filepath="$PROJECT_DIR$/notas.iml" />
+      <module fileurl="file://C:\Users\JAZMIN URBIETA\AndroidStudioProjects\appNotas\app\app.iml" filepath="C:\Users\JAZMIN URBIETA\AndroidStudioProjects\appNotas\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/appNotas.iml" filepath="$PROJECT_DIR$/appNotas.iml" />
+      <module fileurl="file://C:\Users\JAZMIN URBIETA\AndroidStudioProjects\appNotas\notas.iml" filepath="C:\Users\JAZMIN URBIETA\AndroidStudioProjects\appNotas\notas.iml" />
     </modules>
   </component>
 </project>

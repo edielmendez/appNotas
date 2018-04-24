@@ -67,7 +67,7 @@ public class AdaptadorDeNotas extends RecyclerView.Adapter<AdaptadorDeNotas.View
         texto = cursor.getString(2);
         created_at = cursor.getString(3);
         last_modification = cursor.getString(4);
-
+        System.out.println("CURSOSOSOSO "+cursor.getString(1));
         viewHolder.titulo.setText(titulo);
         viewHolder.texto.setText(texto);
         viewHolder.last_modification.setText(last_modification);

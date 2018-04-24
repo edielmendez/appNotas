@@ -38,17 +38,19 @@ public class Utilidades {
      */
     public static JSONObject deCursorAJSONObject(Cursor c) {
         JSONObject jObject = new JSONObject();
+        int id;
         String monto;
         String etiqueta;
         String fecha;
         String descripcion;
-
+        id = c.getInt(COLUMNA_ID);
         monto = c.getString(COLUMNA_MONTO);
         etiqueta = c.getString(COLUMNA_ETIQUETA);
         fecha = c.getString(COLUMNA_FECHA);
         descripcion = c.getString(COLUMNA_DESCRIPCION);
 
         try {
+            jObject.put(ContractParaNotas.Columnas.ID, id);
             jObject.put(ContractParaNotas.Columnas.TITULO, monto);
             jObject.put(ContractParaNotas.Columnas.TEXTO, etiqueta);
             jObject.put(ContractParaNotas.Columnas.CREATED_AT, fecha);

@@ -62,7 +62,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             ContractParaNotas.Columnas.TEXTO,
             ContractParaNotas.Columnas.CREATED_AT,
             ContractParaNotas.Columnas.LAST_MODIFICATION,
-            ContractParaNotas.Columnas.DESCRIPCION
     };
 
     // Indices para las columnas indicadas en la proyección
@@ -72,11 +71,11 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     public static final int COLUMNA_TEXTO = 3;
     public static final int COLUMNA_CREATED_AT = 4;
     public static final int COLUMNA_LAST_MODIFICATION = 5;
-    public static final int COLUMNA_DESCRIPCION = 6;
 
     public SyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
         resolver = context.getContentResolver();
+        System.out.println("CONSTESFDFSDF "+context);
     }
 
     /**
@@ -147,6 +146,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
             switch (estado) {
                 case Constantes.SUCCESS: // EXITO
+
                     actualizarDatosLocales(response, syncResult);
                     break;
                 case Constantes.FAILED: // FALLIDO
@@ -274,6 +274,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         try {
             // Obtener estado
             String estado = response.getString(Constantes.ESTADO);
+            System.out.println("ESTADOOOO "+estado);
             // Obtener mensaje
             String mensaje = response.getString(Constantes.MENSAJE);
             // Obtener identificador del nuevo registro creado en el servidor
@@ -335,10 +336,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
         // Encontrar datos obsoletos
         String id;
-        int monto;
-        String etiqueta;
-        String fecha;
-        String descripcion;
+
         String titulo;
         String texto;
         String created_at;
@@ -352,7 +350,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             created_at = c.getString(COLUMNA_CREATED_AT);
             last_modification = c.getString(COLUMNA_LAST_MODIFICATION);
             //fecha = c.getString(COLUMNA_FECHA);
-            descripcion = c.getString(COLUMNA_DESCRIPCION);
 
             Nota match = expenseMap.get(id);
 
@@ -364,7 +361,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                         .appendPath(id).build();
 
                 // Comprobar si el gasto necesita ser actualizado
-                //boolean b = match.getTitulo() != monto;
+                boolean b = match.getId() != Integer.parseInt(id);
                 boolean b1 = match.getTitulo() != null && !match.getTitulo().equals(titulo);
                 boolean b2 = match.getTexto() != null && !match.getTexto().equals(texto);
                 boolean b3 = match.getCreated_At() != null && !match.getCreated_At().equals(created_at);
@@ -372,11 +369,12 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 //boolean b2 = match.fecha != null && !match.fecha.equals(fecha);
                 //boolean b3 = match.descripcion != null && !match.descripcion.equals(descripcion);
 
-                if (b1 || b2 || b3 || b4) {
+                if (b || b1 || b2 || b3 || b4) {
 
                     Log.i(TAG, "Programando actualización de: " + existingUri);
 
                     ops.add(ContentProviderOperation.newUpdate(existingUri)
+                            .withValue(ContractParaNotas.Columnas.ID, match.getId())
                             .withValue(ContractParaNotas.Columnas.TITULO, match.getTitulo())
                             .withValue(ContractParaNotas.Columnas.TEXTO, match.getTexto())
                             .withValue(ContractParaNotas.Columnas.CREATED_AT, match.getCreated_At())

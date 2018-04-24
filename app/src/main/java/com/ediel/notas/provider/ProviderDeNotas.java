@@ -71,9 +71,9 @@ public class ProviderDeNotas extends ContentProvider {
                 break;
             case ContractParaNotas.SINGLE_ROW:
                 // Consultando un solo registro basado en el Id del Uri
-                long idGasto = ContentUris.parseId(uri);
+                long id = ContentUris.parseId(uri);
                 c = db.query(ContractParaNotas.NOTA, projection,
-                        ContractParaNotas.Columnas._ID + " = " + idGasto,
+                        ContractParaNotas.Columnas._ID + " = " + id,
                         selectionArgs, null, null, sortOrder);
                 c.setNotificationUri(
                         resolver,
@@ -138,9 +138,9 @@ public class ProviderDeNotas extends ContentProvider {
                         selectionArgs);
                 break;
             case ContractParaNotas.SINGLE_ROW:
-                long idGasto = ContentUris.parseId(uri);
+                long id = ContentUris.parseId(uri);
                 affected = db.delete(ContractParaNotas.NOTA,
-                        ContractParaNotas.Columnas.ID_REMOTA + "=" + idGasto
+                        ContractParaNotas.Columnas.ID_REMOTA + "=" + id
                                 + (!TextUtils.isEmpty(selection) ?
                                 " AND (" + selection + ')' : ""),
                         selectionArgs);
@@ -166,9 +166,9 @@ public class ProviderDeNotas extends ContentProvider {
                         selection, selectionArgs);
                 break;
             case ContractParaNotas.SINGLE_ROW:
-                String idGasto = uri.getPathSegments().get(1);
+                String id = uri.getPathSegments().get(1);
                 affected = db.update(ContractParaNotas.NOTA, values,
-                        ContractParaNotas.Columnas.ID_REMOTA + "=" + idGasto
+                        ContractParaNotas.Columnas.ID_REMOTA + "=" + id
                                 + (!TextUtils.isEmpty(selection) ?
                                 " AND (" + selection + ')' : ""),
                         selectionArgs);

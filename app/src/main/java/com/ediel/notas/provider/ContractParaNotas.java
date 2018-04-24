@@ -71,7 +71,6 @@ public class ContractParaNotas {
         public final static String TEXTO = "texto";
         public final static String CREATED_AT = "created_at";
         public final static String LAST_MODIFICATION = "last_modification";
-        public final static String DESCRIPCION = "descripcion";
 
         public static final String ESTADO = "estado";
         public static final String ID_REMOTA = "idRemota";
